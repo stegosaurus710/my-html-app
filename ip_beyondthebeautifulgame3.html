@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BtB | The Game</title>
+    <link rel="icon" href="img/Lotus-poster-1.ico" type="image/x-icon">
+
+    <style>
+        {
+        "name": "My Web App",
+        "short_name": "WebApp",
+        "start_url": "/index.html",
+        "display": "standalone",
+        "background_color": "#ffffff",
+        "theme_color": "#000000",
+        "icons": [
+            {
+            "src": "icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+            }
+        ]
+        }
+
+
+
+        @font-face {
+        font-family: 'MyCustomFont';
+        src: url('img/Fontb01-Regular.ttf') format('truetype');
+        font-weight: normal; /* Add other font properties as needed */
+        font-style: normal;
+        }
+
+        /* Applying the custom font to the body or specific element */
+        body {
+        font-family: 'MyCustomFont', sans-serif;
+        }
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            background-color: black;
+            /* background-image: url(img/img-parasolinstitute1.PNG); 
+            background-size:contain; */
+            /* background-repeat: no-repeat; */
+        }
+        .audioSrc{
+            display: inline-block; 
+            width: 300px; 
+            height: 300px; 
+            border: 10px solid black;
+            background-color: pink; 
+        }
+
+        .imageSrc{
+            width: auto; 
+            height: 300px; 
+            border: 10px solid black;
+
+        }
+
+        .textSrc{
+            display: inline-block; 
+            width: 500px; 
+            height: 25px; 
+            overflow-y: scroll; 
+            scrollbar-width: none; 
+            color: red; 
+            background-color: goldenrod; 
+            font-size: 20px; 
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            background-image: url(img/palmleaftexture.PNG);
+        }
+        
+        .villaintextSrc{
+            display: inline-block; 
+            width: 500px; 
+            height: 100px; 
+            overflow-y: scroll; 
+            scrollbar-width: none; 
+            border: 10px solid black; 
+            color: black; 
+            background-color: red; 
+            font-size: xx-large; 
+            padding: 20px;
+        }
+
+        .divSrc{
+            display: inline-block; 
+            width: 500px;
+        }
+
+        .videoSrc{
+            width: 1500px; 
+            height: 1500px; 
+        }
+
+        body{
+            background-color: black;
+        }
+
+        .filterDiv {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .btn {
+            border: none;
+            outline: none;
+            padding: 12px 16px;
+            background-color: #f1f1f1;
+            cursor: pointer;
+            margin: .25%;
+        }
+
+        .btn.active {
+            background-color: red;
+            color: white;
+        }
+
+        .section{
+            width: 25%;
+            border: 10px solid black;
+        }
+
+        .container{
+            background-color: black;
+            width: 100%;
+            height: 100%; 
+            overflow-y: scroll;
+            scrollbar-width: thin;
+
+            /* display: grid;
+            grid-template-columns: auto auto auto auto auto auto;
+            grid-template-rows: 80%; */
+
+            display: flex;
+            flex-wrap: wrap; /* Allows elements to wrap to the next line */
+            justify-content: flex-start; /* Aligns items along the start of the flex container */
+            align-items: flex-start; /* Aligns items along the start of the cross axis */
+        }
+
+        .cardDetails{
+            background-color: yellow;
+            width: 300px; 
+            height: 600px; 
+            margin: 25px; 
+            border: 5px solid black; 
+
+            text-align: center;
+            
+            display: block; 
+            overflow-y: scroll;
+            scrollbar-width: none;
+
+            opacity: 0.5;
+        }
+
+        .cardDetails:hover{
+            border: none;
+            box-shadow: 20px 10px 10px black;
+            margin: 40px;
+            transition-duration: 0.7s;
+            cursor: pointer;
+            opacity: 1;
+        }
+
+        .cardDetails img{
+            width: 100%;
+        }
+
+        .romanizedScuff{
+            text-align: center; 
+            opacity: 0;
+        }
+
+        .romanizedScuff:hover{
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 15%;;
+            top: 0;
+            left: 0;
+            position: fixed;
+            z-index: 1;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 25px;
+            color: black;
+            display: block;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .gallery-container {
+        overflow-x: auto; /* Enable horizontal scrolling */
+        white-space: nowrap; /* Prevent images from wrapping */
+        }
+
+        .gallery {
+        display: inline-block; /* Display images horizontally */
+        }
+
+        .gallery img {
+        width: 200px; /* Adjust image width as needed */
+        height: auto; /* Maintain aspect ratio */
+        margin-right: 10px; /* Add some spacing between images */
+        }
+
+        .moodImages{
+            height: 600px; 
+            margin: 20px;
+        }
+
+        .dropbtn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        }
+
+        .dropbtn:hover, .dropbtn:focus {
+        background-color: #3e8e41;
+        }
+
+        #myInput {
+        box-sizing: border-box;
+        background-image: url('searchicon.png');
+        background-position: 14px 12px;
+        background-repeat: no-repeat;
+        font-size: 16px;
+        padding: 14px 20px 12px 45px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+        }
+
+        #myInput:focus {outline: 3px solid #ddd;}
+
+        .dropdown {
+        position: relative;
+        display: inline-block;
+        }
+
+        .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f6f6f6;
+        min-width: 230px;
+        overflow: auto;
+        border: 1px solid #ddd;
+        z-index: 1;
+        }
+
+        .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        }
+
+        .dropdown a:hover {background-color: #ddd;}
+
+        .show {display: block;}
+
+        /* Style the tab */
+        /* .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        width: fit-content;
+        } */
+
+        /* Style the buttons inside the tab */
+        .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+        background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+        background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+        }
+
+        .img-container {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .thumbnail {
+            width: 200px;
+            cursor: pointer;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .full-image {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            z-index: 9999;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff5f5f;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 50%;
+            z-index: 10000;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        self.addEventListener('install', (e) => {
+        e.waitUntil(
+            caches.open('my-cache').then((cache) => {
+            return cache.addAll([
+                '/',
+                '/index.html',
+                '/styles.css',
+                '/app.js',
+            ]);
+            })
+        );
+        });
+
+        self.addEventListener('fetch', (e) => {
+        e.respondWith(
+            caches.match(e.request).then((cacheResponse) => {
+            return cacheResponse || fetch(e.request);
+            })
+        );
+        });
+    </script>
+
+    <link rel="manifest" href="manifest.json">
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js');
+    }
+    </script>
+
+    
+    <div style="width: 100%; height: 2vh; background-color: black; color: black; position: fixed; top: 0; z-index: 1; display: flex; justify-content: flex-start; align-items: center; padding: 2%; background-color: black">
+        <img src = "img/thumbnail-transparent-sinxay.PNG" style = "height: 5vh;width: auto;"> 
+        <!-- <a href = "#homeScreen"><button style="width: auto; height: 5vh;margin: 25%; background-color: darkgoldenrod; font-size: 25px; display: inline-flex;">HOME</button></a>
+        <a href = "#characterGlossary"><button style="width: auto; height: 5vh;margin: 25%; background-color: darkgoldenrod; font-size: 25px; display: inline-flex;">VIDEO</button></a>
+        <a href = "#characterGlossary"><button style="width: auto; height: 5vh;margin: 25%; background-color: darkgoldenrod; font-size: 25px; display: inline-flex;">JATAKA</button></a>
+        <a href = "#characterGlossary"><button style="width: auto; height: 5vh;margin: 25%; background-color: darkgoldenrod; font-size: 25px; display: inline-flex;">TEXT</button></a>
+        <a href = "#characterGlossary"><button style="width: auto; height: 5vh;margin: 25%; background-color: darkgoldenrod; font-size: 25px; display: inline-flex;">300</button></a>
+        <a href = "#characterGlossary"><button style="width: auto; height: 5vh;margin: 25%; background-color: darkgoldenrod; font-size: 25px; display: inline-flex;">500</button></a>
+        <a href = "#characterGlossary"><button style="width: auto; height: 5vh;margin: 25%; background-color: darkgoldenrod; font-size: 25px; display: inline-flex;">1500</button></a>
+        <a href = "#characterGlossary"><button style="width: auto; height: 5vh;margin: 25%; background-color: darkgoldenrod; font-size: 25px; display: inline-flex;">3000</button></a> -->
+        <div style = "background-color: white; width: auto; height: 5vh;border-radius: 10px; margin: 1%;">
+            <a href = "#homeDiff" style = "text-decoration: none; ">
+            <img src = "img/img-parasolinstitute2.PNG" style = "width: auto; height: 5vh;border-radius: 10px; margin: 1%;">
+            <h1 style = "text-align: center; padding: 5px; font-size: 20px; background-color: darkgoldenrod; border-radius: 50px; border: 5px solid black;             background-image: url(img/palmleaftexture.PNG);">HOME</h1>
+            </a>
+        </div>
+        <div style = "background-color: white; width: auto; height: 5vh;border-radius: 10px; margin: 1%;">
+            <a href = "#glossaryDiff" style = "text-decoration: none;">
+            <img src = "img/thumbnail-sinxay.PNG" style = "width: auto; height: 5vh;border-radius: 10px; margin: 1%;">
+            <h1 style = "text-align: center; padding: 5px; font-size: 20px; background-color: darkgoldenrod; border-radius: 50px; border: 5px solid black;             background-image: url(img/palmleaftexture.PNG);">CHARACTER GLOSSARY</h1>
+            </a>
+        </div>
+        <div style = "background-color: white; width: auto; height: 5vh;border-radius: 10px; margin: 1%;">
+            <a href = "#gameDiff" style = "text-decoration: none;">
+            <img id = "gameDiffImage" src = "img/japan-20.PNG" style = "width: auto; height: 5vh;border-radius: 10px; margin: 1%;">
+            <h1 style = "text-align: center; padding: 5px; font-size: 20px; background-color: darkgoldenrod; border-radius: 50px; border: 5px solid black;             background-image: url(img/palmleaftexture.PNG);">GAME</h1>
+            </a>
+        </div>
+
+        <button id="fullscreenButton" style="font-family: 'MyCustomFont', sans-serif; position: fixed; top: 20px; right: 20px; padding: 10px 20px; color: black; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; background-image: url(img/palmleaftexture.PNG);">
+           <div> Toggle Fullscreen </div>
+        </button>
+    </div>
+
+
+    <div id = "homeDiff" style = "height: 15vh;"></div>
+    <div style = "display: block; height: 90vh;">
+        <div  style="height: 100%; background-color: darkred; width: 100%;">
+            <img src = "img/instagram15.png" style = "width: 100%; height: 100%;">
+        </div>
+    </div>
+
+
+    <div id = "glossaryDiff" style = "height: 15vh;"></div>
+    <h1 style = "text-align: center; padding: 10px; font-size: 20px; background-color: darkgoldenrod; border-radius: 50px; border: 5px solid black;             background-image: url(img/palmleaftexture.PNG);">CHARACTER GLOSSARY</h1>
+    
+        <div style = "margin-left: 10%; margin-right: 10%;">
+
+            <div style = "background-color: darkgoldenrod; width: 100%; padding: 1%;             background-image: url(img/palmleaftexture.PNG);">
+                <button id = "legendoftheDayButton" style = "width: 300px; margin: auto; display: block; padding: 5px; text-align: center; background-color: darkgoldenrod; border-radius: 50px; width: fit-content; border: 2px solid black;         font-family: 'MyCustomFont', sans-serif;"><h2>LEGEND OF THE DAY</h2></button>
+                <div id = "legendoftheDayContainer" style = "height: inherit"></div>
+            </div>
+            <!-- <div style = "background-color: darkgoldenrod; width: 100%; height: 25%;">
+
+                
+            </div> -->
+            
+        
+            <div style = "display: inline-flex; width: 100%; height: 35vh; padding: 1%;">
+                <div style = " width: 50%; height: 100%;">
+                    <!-- <button id="toggleButton">Toggle Card Details</button> -->
+                    <!-- <button id="randomProfileButton">Display Random Profile</button> -->
+                    <div style="display: flex; justify-content: center;">
+                        <h1 id="characterArray" style="text-align: center; margin: 10px; padding: 10px; font-size: 20px; background-color: darkgoldenrod; border-radius: 50px; width: fit-content; border: 5px solid black;"></h1>
+                    </div>
+                    <!-- <form id="filterFormBefore" style = "display: inline-flex; width: 100%; height: 5vh; background-color: goldenrod; overflow-x: scroll; scrollbar-width: thin;"></form> -->
+                    <form id="filterForm" style = "display: flex; flex-wrap: wrap; width: 100%; height: 15vh; background-color: black; overflow-y: scroll; scrollbar-width: none;"></form>
+                    <!-- <form id="filterFormTwo" style = "display: inline-flex; width: 100%; height: 5vh; background-color: goldenrod; overflow-x: scroll; scrollbar-width: thin;"></form>
+                    <form id="filterFormThree" style = "display: inline-flex; width: 100%; height: 5vh; background-color: goldenrod; overflow-x: scroll; scrollbar-width: thin;"></form> -->
+                    <div class = "container" id = "characterGlossaryContainer" style = "height: 100%;"></div>
+                </div>
+                <!-- <div class="tab">
+                    <button class="tablinks" onclick="openCity(event, 'characterSummary')" id="defaultOpen"><h1>Character Summary</h1></button>
+                    <button class="tablinks" onclick="openCity(event, 'learnLao')"><h1>ຮຽນພາສາລາວ - SUMMON</h1></button> -->
+                    <!-- <button class="tablinks" onclick="openCity(event, 'recipe')"><h1>RECIPE</h1></button> -->
+                <!-- </div>
+        
+                <div id="learnLao" class="tabcontent" style = "color: white; background-color: black; width: 100%; height: 100%; position: relative;">
+                    <h1>LAO PHRASE GLOSSARY</h1>
+                    <br><br>
+                    <h1>Yvon: Summon</h1>
+                    <h1>Shauna: Summon</h1>
+                    <h1>ຮຽນພາສາລາວ - SUMMON</h1>
+                    <h1>ເຄື່ອງຈັກນີ້ມີໄວ້ສໍາລັບຫຍັງຂ້ອຍກໍບໍ່ຮູ້</h1><h1>I don't know what this machine is for.</h1>
+                    <h1>ຂ້ອຍຍິງປືນບໍ່ເປັນ</h1><h1>I don't know how to shoot a gun.</h1>
+                    <h1>ສິບຫ້ານາທີ</h1><h1>Fifteen minutes.</h1>
+                    <h1>ຕໍ່ມາເຈົ້າໄດ້ຍ້າຍໄປໃສບໍ</h1><h1>Later on, did you move to anywhere?</h1>
+                </div>
+        
+                <div id="characterSummary" class="tabcontent"></div> -->
+                <div id = "characterSummaryContainer" style = "width: 50%; height: 55vh; background-color: darkgoldenrod; overflow-y: scroll; scrollbar-width: none; background-image: url(img/img-hellcreek.PNG); background-size:cover;"></div>
+               
+                
+                <!-- <div id = "characterSummaryContainer" style = "background-color: darkgoldenrod; width: 50%; height: 100%; position: relative;"></div> -->
+                
+            </div>
+        </div>
+
+
+
+    <!-- <h1 style = "text-align: center; padding: 10px; font-size: 20px; background-color: darkseagreen; border-radius: 50px; border: 5px solid black;">XIENG</h1>
+    <h1 style = "text-align: center; padding: 10px; font-size: 20px; background-color: olivedrab; border-radius: 50px; border: 5px solid black;">DHIT</h1>
+    <h1 style = "text-align: center; padding: 10px; font-size: 20px; background-color: orange; border-radius: 50px; border: 5px solid black;">MAHA</h1>
+    <h1 style = "text-align: center; padding: 10px; font-size: 20px; background-color: azure; border-radius: 50px; border: 5px solid black;">KHUN</h1>
+    <h1 style = "text-align: center; padding: 10px; font-size: 20px; background-color: darkred; border-radius: 50px; border: 5px solid black;">PHAYA</h1>
+    <h1 style = "text-align: center; padding: 10px; font-size: 20px; background-color: seashell; border-radius: 50px; border: 5px solid black;">THEVADA, 0.01%</h1> -->
+        <!-- <div style="display: flex; justify-content: center; align-items: center;">
+            <button id = "startButton" style="width: 300px; margin: auto; padding: 10px; text-align: center; border-radius: 50px; cursor: pointer; width: fit-content; border: 5px solid black;background-color: green;"><h1>START</h1></button>
+            <button id = "resetButton" style="width: 300px; margin: auto; padding: 10px; text-align: center; border-radius: 50px; cursor: pointer; width: fit-content; border: 5px solid black; background-color: red;"><h1>RESET</h1></button>
+        </div> -->
+
+        <div style = "height: 35vh;"></div>
+        <!-- <a href = "btb_recipe.txt" style = "text-decoration: none;"><h1 style = "width: 100vh; text-align: center; padding: 10px; font-size: 20px; background-color: darkred; border-radius: 50px; border: 5px solid black;">RED "THREAT" Analysis Stages, STD.ofLiving- . "The audience's imagination is the best animation." "A hero is only as good as their villain.", one motion action Character's_leitmotif</h1></a> -->
+        <div style = "width: 100%; height: 55vh; overflow-y: scroll; scrollbar-width: thin;">
+            <div class="image-container" style = "display: inline-flex; flex-direction: column; align-items: center;">
+                <img class="imageSrc" style = "cursor: pointer;" id="stage01" src="img/img-nangkaikaeo.png">
+                <div class = "textSrc"> "How does that feel, my love?" </div>
+                <div class = "textSrc"> A cold air whistles outside. Inside, a devoted orphan dutifully tends to a shrine, at the request of its magnolia caretaker. She places down the newest addition: a bundle of poisonous liana. She speaks softly of her adventures during the day and mumbles one last wish as the sun sets and she lies down to rest. As the sunlight disappears, the night stalker arises from his slumber, coated in liana. </div>
+                <!-- <div style="display: inline-flex;">
+                    <button onclick="showPrevImage(2)">Previous Image</button>
+                    <button onclick="showNextImage(2)">Next Image</button> add to the [0,0,0] array to make more containers
+                </div> -->
+            </div>
+
+            <div class="image-container" style = "display: inline-flex; flex-direction: column; align-items: center;">
+                <img class="imageSrc" style = "cursor: pointer;" id="stage01" src="img/img-khampha.png">
+                <div class = "textSrc">  </div>
+                <div class = "textSrc">  </div>
+                <!-- <div style="display: inline-flex;">
+                    <button onclick="showPrevImage(2)">Previous Image</button>
+                    <button onclick="showNextImage(2)">Next Image</button> add to the [0,0,0] array to make more containers
+                </div> -->
+            </div>
+
+            <div class="image-container" style = "display: inline-flex; flex-direction: column; align-items: center;">
+                <img class="imageSrc" style = "cursor: pointer;" id="stage01" src="img/img-phikongkoi.png">
+                <div class = "textSrc"> </div>
+                <div class = "textSrc">  </div>
+                <!-- <div style="display: inline-flex;">
+                    <button onclick="showPrevImage(2)">Previous Image</button>
+                    <button onclick="showNextImage(2)">Next Image</button> add to the [0,0,0] array to make more containers
+                </div> -->
+            </div>
+
+            <div class="image-container" style = "display: inline-flex; flex-direction: column; align-items: center;">
+                <img class="imageSrc" style = "cursor: pointer;" id="stage01" src="img/btbboard-32.png">
+                <div class = "textSrc"> "What can I do now that I have lost everything?" </div>
+                <div class = "textSrc">  </div>
+                <!-- <div style="display: inline-flex;">
+                    <button onclick="showPrevImage(2)">Previous Image</button>
+                    <button onclick="showNextImage(2)">Next Image</button> add to the [0,0,0] array to make more containers
+                </div> -->
+            </div>
+
+            <div class="image-container" style = "display: inline-flex; flex-direction: column; align-items: center;">
+                <img class="imageSrc" style = "cursor: pointer;" id="stage01" src="img/img-malong.png">
+                <div class = "textSrc">  </div>
+                <div class = "textSrc">  </div>
+                <!-- <div style="display: inline-flex;">
+                    <button onclick="showPrevImage(2)">Previous Image</button>
+                    <button onclick="showNextImage(2)">Next Image</button> add to the [0,0,0] array to make more containers
+                </div> -->
+            </div>
+
+            <div class="image-container" style = "display: inline-flex; flex-direction: column; align-items: center;">
+                <img class="imageSrc" style = "cursor: pointer;" id="stage01" src="img/img-kiengkham.PNG">
+                <div class = "textSrc">  </div>
+                <div class = "textSrc">  </div>
+                <!-- <div style="display: inline-flex;">
+                    <button onclick="showPrevImage(2)">Previous Image</button>
+                    <button onclick="showNextImage(2)">Next Image</button> add to the [0,0,0] array to make more containers
+                </div> -->
+            </div>
+
+
+        </div>
+        
+
+            <!-- <div class="image-container" style = "display: inline-flex; flex-direction: column; align-items: center;">
+                <img class="imageSrc" id="instagram12" src="img/instagram12.PNG">
+                <div class = "textSrc"> <br> </div>
+                <img class="imageSrc" id="instagram9" src="img/instagram9.PNG" style="display: none;">
+                <div class = "textSrc"> <br> </div>
+                <img class="imageSrc" id="instagram14" src="img/instagram14.PNG" style="display: none;">
+                <div class = "textSrc"> <br> </div>
+                <img class="imageSrc" id="instagram19" src="img/instagram9.PNG" style="display: none;">
+                <div class = "textSrc"> <br> </div>
+                <div style="display: inline-flex;">
+                    <button onclick="showPrevImage(1)">Previous Image</button>
+                    <button onclick="showNextImage(1)">Next Image</button>
+                </div>
+                <div class="textSrc"><br></div>
+            </div>
+            
+            <div class="image-container" style = "display: inline-flex; flex-direction: column; align-items: center;">
+                <img class="imageSrc" id="instagram15" src="img/instagram15.PNG">
+                <div class = "textSrc"> Text 1 </div>
+                <img class="imageSrc" id="instagram10" src="img/instagram10.PNG" style="display: none;">
+                <div class = "textSrc" style="display: none;"> Text 2 </div>
+                <img class="imageSrc" id="instagram16" src="img/instagram16.PNG" style="display: none;">
+                <div class = "textSrc" style="display: none;"> Text 3 </div>
+                <div style="display: inline-flex;">
+                    <button onclick="showPrevImage(2)">Previous Image</button>
+                    <button onclick="showNextImage(2)">Next Image</button>
+                </div>
+            </div> -->
+            
+
+
+        <h1 style = "text-align: center; color: white; font-size: 15px; margin: 0.5%">CONTACT INFO</h1>
+        <h1 style = "text-align: center; color: white; font-size: 15px; margin: 0.5%">ABOUT</h1>
+        <h1 style = "text-align: center; color: white; font-size: 15px; margin: 0.5%">TERMS OF SERVICE</h1>
+    </div>
+
+    
+
+
+    <script>
+        // Variables to keep track of the currently visible image and text for each container
+        let currentImageIndex = [0, 0, 0]; // Array to store the current image index for each container
+        let currentTextIndex = [0, 0, 0]; // Array to store the current text index for each container
+    
+        function showNextImage(containerId) {
+            var container = document.querySelectorAll('.image-container')[containerId - 1]; // Get the correct container
+            var images = container.querySelectorAll('.imageSrc'); // Get all images in that container
+            var texts = container.querySelectorAll('.textSrc'); // Get all text elements in that container
+    
+            // Hide the currently visible image and text
+            images[currentImageIndex[containerId - 1]].style.display = 'none';
+            texts[currentTextIndex[containerId - 1]].style.display = 'none';
+    
+            // Move to the next image and text index
+            currentImageIndex[containerId - 1] = (currentImageIndex[containerId - 1] + 1) % images.length;
+            currentTextIndex[containerId - 1] = (currentTextIndex[containerId - 1] + 1) % texts.length;
+    
+            // Show the next image and text
+            images[currentImageIndex[containerId - 1]].style.display = 'block';
+            texts[currentTextIndex[containerId - 1]].style.display = 'block';
+        }
+    
+        function showPrevImage(containerId) {
+            var container = document.querySelectorAll('.image-container')[containerId - 1]; // Get the correct container
+            var images = container.querySelectorAll('.imageSrc'); // Get all images in that container
+            var texts = container.querySelectorAll('.textSrc'); // Get all text elements in that container
+    
+            // Hide the currently visible image and text
+            images[currentImageIndex[containerId - 1]].style.display = 'none';
+            texts[currentTextIndex[containerId - 1]].style.display = 'none';
+    
+            // Move to the previous image and text index
+            currentImageIndex[containerId - 1] = (currentImageIndex[containerId - 1] - 1 + images.length) % images.length;
+            currentTextIndex[containerId - 1] = (currentTextIndex[containerId - 1] - 1 + texts.length) % texts.length;
+    
+            // Show the previous image and text
+            images[currentImageIndex[containerId - 1]].style.display = 'block';
+            texts[currentTextIndex[containerId - 1]].style.display = 'block';
+        }
+    </script>
+  
+            
+            
+
+    
+    
+    <script>
+        // Select all <img> elements with the class "imageSrc"
+        const images = document.querySelectorAll('img.imageSrc');
+        const numberArrayd = document.querySelector('#numberArrayd');
+
+        // Create an array to store the image elements
+        const imageArray = Array.from(images);
+
+        // Count the number of image elements
+        const imageCount = imageArray.length;    
+        numberArrayd.innerHTML = imageCount;
+    </script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <script>
+            const imageButton = document.getElementById('imageButton');
+            const videoButton = document.getElementById('videoButton');
+            const textButton = document.getElementById('textButton');
+            const smallerButton = document.getElementById('smallerButton');
+            const smallButton = document.getElementById('smallButton');
+            const largeButton = document.getElementById('largeButton');
+            const largerButton = document.getElementById('largerButton');
+    
+            const imageSrcs = document.querySelectorAll('.imageSrc');
+            const videoSrcs = document.querySelectorAll('.videoSrc');
+            const textSrcs = document.querySelectorAll('.textSrc');
+            const villaintextSrcs = document.querySelectorAll('.villaintextSrc');
+    
+            function imageToggle(){
+                imageSrcs.forEach(imageSrcz => {
+                        if (imageSrcz.style.display === 'none') {
+                            imageSrcz.style.display = 'inline-block';
+                        } else {
+                            imageSrcz.style.display = 'none';
+                        }
+                    });
+            }
+    
+            function videoToggle(){
+                videoSrcs.forEach(videoSrcz => {
+                    if (videoSrcz.style.display === 'none') {
+                        videoSrcz.style.display = 'inline-block';
+                    } else {
+                        videoSrcz.style.display = 'none';
+                    } 
+                });
+            }
+    
+            function textToggle(){
+                textSrcs.forEach(textSrcz => {
+                        if (textSrcz.style.display === 'none') {
+                            textSrcz.style.display = 'inline-block';
+                        } else {
+                            textSrcz.style.display = 'none';
+                        }
+                    });
+                villaintextSrcs.forEach(villaintextSrcz => {
+                    if (villaintextSrcz.style.display === 'none') {
+                        villaintextSrcz.style.display = 'inline-block';
+                    } else {
+                        villaintextSrcz.style.display = 'none';
+                    }
+                });
+                
+            }
+    
+            // // #RATIO
+             const smallerRatio = 300;
+             const smallRatio = 700;
+             const largeRatio = 1500;
+             const largerRatio = 3100;
+    
+             function smallerToggle(){
+                 imageSrcs.forEach(imageSrcz => {
+                         imageSrcz.style.width = smallerRatio + 'px';
+                         imageSrcz.style.height = smallerRatio + 'px';
+                 });
+                 videoSrcs.forEach(videoSrcz => {
+                     videoSrcz.style.width = smallerRatio + 'px';
+                     videoSrcz.style.height = smallerRatio + 'px';
+                 });
+             }
+    
+             function smallToggle(){
+                 imageSrcs.forEach(imageSrcz => {
+                         imageSrcz.style.width = smallRatio + 'px';
+                         imageSrcz.style.height = smallRatio + 'px';
+                 });
+                 videoSrcs.forEach(videoSrcz => {
+                     videoSrcz.style.width = smallRatio + 'px';
+                     videoSrcz.style.height = smallRatio + 'px';
+                 });
+             }
+    
+             function largeToggle(){
+                 imageSrcs.forEach(imageSrcz => {
+                     imageSrcz.style.width = largeRatio + 'px';
+                     imageSrcz.style.height = largeRatio + 'px';
+                 });
+                 videoSrcs.forEach(videoSrcz => {
+                     videoSrcz.style.width = largeRatio + 'px';
+                     videoSrcz.style.height = largeRatio + 'px';
+                 });
+             }
+    
+             function largerToggle(){
+                 imageSrcs.forEach(imageSrcz => {
+                     imageSrcz.style.width = largerRatio + 'px';
+                     imageSrcz.style.height = largerRatio + 'px';
+                 });
+                 videoSrcs.forEach(videoSrcz => {
+                     videoSrcz.style.width = largerRatio + 'px';
+                     videoSrcz.style.height = largerRatio + 'px';
+                 });
+             }
+
+            // #RATIO
+ 
+    
+    
+            imageButton.addEventListener('click', imageToggle);
+            videoButton.addEventListener('click', videoToggle);
+            textButton.addEventListener('click', textToggle);
+            smallerButton.addEventListener('click', smallerToggle);
+            smallButton.addEventListener('click', smallToggle);
+            largeButton.addEventListener('click', largeToggle);
+            largerButton.addEventListener('click', largerToggle);
+    
+            window.onload(smallerToggle);
+    
+            function handleDragStart(event) {
+                event.dataTransfer.setData('text/plain', event.target.src);
+            }
+    
+        </script>
+    
+    </body>
+    </html>
+    
+
+
+
+
+
+<!-- <form id="filterFormBefore" style = "display: inline-flex; width: 100%; height: 5vh; background-color: goldenrod; overflow-x: scroll; scrollbar-width: thin;"></form> -->
+<!-- 
+    <script src = "arrays_btbFiltersLegendBefore.js"></script>    
+    <script>
+        let filterFormBefore = document.querySelector("#filterFormBefore");
+
+        filtersLegendBefore.forEach(legendFilterBefore => createFilterBefore(legendFilterBefore));
+
+        function createFilterBefore(legendFilterBefore){
+            let filterDiv = document.createElement('div'); 
+            
+            filterDiv.innerHTML = `
+            <div style = "background-color: gold; height: 4vh; width: 95%; margin: 5px;">
+                <label><input type="checkbox" class="btbfilter" value="${legendFilterBefore.legendValue}" style = "accent-color: red;">
+                    <img style = "height: 75%; width: 25%;" src = "${legendFilterBefore.image}"> 
+                    <img style = "height: 75%; width: 25%;" src = "${legendFilterBefore.image2}"> 
+                    <img style = "height: 75%; width: 25%;" src = "${legendFilterBefore.image3}"> 
+                    <h3 style = "text-align: right; font-size: 5px;">${legendFilterBefore.name}</h3>
+                    <h3 style = "text-align: right; font-size: 5px;">${legendFilterBefore.laoName}</h3>
+                </label>
+            </div>
+            `;
+            
+            filterFormBefore.appendChild(filterDiv);
+        }
+
+    </script> -->
+
+    <script src = "arrays_btbFiltersLegend.js"></script>    
+    <script>
+        let filterForm = document.querySelector("#filterForm");
+        let characterArrayLength = document.querySelector("#characterArray");
+
+        filtersLegend.forEach(legendFilter => createFilter(legendFilter));
+
+        function createFilter(legendFilter) {
+            let filterDiv = document.createElement('div'); 
+            
+            // Start the HTML structure
+            let filterHTML = `
+            <div class="legend-filter" style="background-image: url(img/treasurechesttexture.PNG); color: white; height: 5vh; width: 11vh; font-size: 20px; border: 2px solid black; overflow-y: scroll; scrollbar-width: none; cursor: pointer;">
+                <label>
+                    <input type="checkbox" class="btbfilter" value="${legendFilter.legendValue}" style="accent-color: red; display: none;">
+                    <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 75%; gap: 10px;">`;
+
+            // Add the first image (always present)
+            filterHTML += `<img style="height: 100%; width: 25%;" src="${legendFilter.image}">`;
+
+            // Conditionally add image2 if it exists
+            if (legendFilter.image2) {
+                filterHTML += `<img style="height: 100%; width: 25%;" src="${legendFilter.image2}">`;
+            }
+
+            // Conditionally add image3 if it exists
+            if (legendFilter.image3) {
+                filterHTML += `<img style="height: 100%; width: 25%;" src="${legendFilter.image3}">`;
+            }
+
+            // Close the flex container and the label
+            filterHTML += `</div>
+                        <h3 style="text-align: center; font-size: 10px;">${legendFilter.name}</h3>
+                        <h3 style="text-align: center; font-size: 10px;">${legendFilter.laoName}</h3>
+                    </label>
+                </div>`;
+
+            // Insert the filter HTML into the div
+            filterDiv.innerHTML = filterHTML;
+
+            // Append the filter div to the form
+            filterForm.appendChild(filterDiv);
+
+            // Get the checkbox element
+            const checkbox = filterDiv.querySelector('.btbfilter');
+
+            // Add event listener to toggle the background color when checkbox is clicked
+            checkbox.addEventListener('change', function() {
+                const div = checkbox.closest('.legend-filter'); // Get the parent div
+                if (checkbox.checked) {
+                    div.style.backgroundColor = 'darkred'; // Light red when selected
+                    div.style.color = 'white';
+                } else {
+                    div.style.backgroundColor = 'darkgoldenrod'; // Original color when deselected
+                    div.style.color = 'black';
+                }
+            });
+        }
+
+    </script>
+
+    <!-- <script src = "arrays_btbFormationFilters.js"></script>    
+    <script>
+        let filterFormTwo = document.querySelector("#filterFormTwo");
+
+        legendFiltersTwo.forEach(legendFilterTwo => createFilterTwo(legendFilterTwo));
+
+        function createFilterTwo(legendFilterTwo){
+            let filterDiv = document.createElement('div'); 
+            
+            filterDiv.innerHTML = `
+            <div style = "background-color: gold; width: 10%; height: 15%; padding: 10px; margin: 10px; overflow-y: scroll; scrollbar-width: none;">
+                <label><input type="checkbox" class="btbfilter" value="${legendFilterTwo.legendValue}" style = "accent-color: red;">
+                    <img class = "checkboxImage" src = "${legendFilterTwo.image}"> 
+                    <img class = "checkboxImage" src = "${legendFilterTwo.image2}"> 
+                    <img class = "checkboxImage" src = "${legendFilterTwo.image3}"> 
+                    <h3 style = "text-align: right;">${legendFilterTwo.name}</h3>
+                    <h3 style = "text-align: right;">${legendFilterTwo.laoName}</h3>
+                </label>
+            </div>
+            `;
+            
+            filterFormTwo.appendChild(filterDiv);
+        }
+
+    </script>
+
+<script src = "arrays_btbFiltersLegendThree.js"></script>    
+<script>
+    let filterFormThree = document.querySelector("#filterFormThree");
+
+    filtersLegendThree.forEach(legendFilterThree => createFilterThree(legendFilterThree));
+
+    function createFilterThree(legendFilterThree){
+        let filterDiv = document.createElement('div'); 
+        
+        filterDiv.innerHTML = `
+        <div style = "background-color: gold; width: 10%; height: 15%; padding: 10px; margin: 10px; overflow-y: scroll; scrollbar-width: none;">
+            <label><input type="checkbox" class="btbfilter" value="${legendFilterThree.legendValue}" style = "accent-color: red;">
+                <img class = "checkboxImage" src = "${legendFilterThree.image}"> 
+                <img class = "checkboxImage" src = "${legendFilterThree.image2}"> 
+                <img class = "checkboxImage" src = "${legendFilterThree.image3}"> 
+                <h3 style = "text-align: right;">${legendFilterThree.name}</h3>
+                <h3 style = "text-align: right;">${legendFilterThree.laoName}</h3>
+            </label>
+        </div>
+        `;
+        
+        filterFormThree.appendChild(filterDiv);
+    }
+
+</script> -->
+
+
+<!-- onmouseover = "this.src = '${glossaryProfile.thumbnailImageTransparent2}';" onmouseout = "this.src = '${glossaryProfile.thumbnailImageTransparent}';" -->
+
+    <script src = "arrays_btbglossaryProfile.js"></script>
+    <script>
+        let characterGlossaryContainer = document.querySelector("#characterGlossaryContainer");
+
+        
+        glossaryProfiles.forEach((glossaryProfile, index) => createProfile(glossaryProfile, index));
+
+        function createProfile(glossaryProfile, index){
+            let characterProfile = document.createElement('div'); 
+            
+            characterProfile.innerHTML = `
+            <div class = "btbelement ${glossaryProfile.legendValue}" style = "cursor: pointer;">
+                <img src = "${glossaryProfile.thumbnailImageTransparent}" style = "width: 100px; height: 100px; overflow-y: auto; background-color: ${glossaryProfile.appearance}" onmouseover = "this.src = '${glossaryProfile.thumbnailImage}';" onmouseout = "this.src = '${glossaryProfile.thumbnailImageTransparent}';">
+                    <div class = "cardDetails" style = "margin: 0px; background-color: ${glossaryProfile.status}; border: 10px black ${glossaryProfile.unifying}; display: none;">
+                        <h1 class = "textSrc">${index}</h1>
+                        <h2 class = "textSrc">${glossaryProfile.name}</h2>
+                        <h2 class = "textSrc">${glossaryProfile.laoName}</h2>
+                        <img src = "${glossaryProfile.thumbnailImage}" style = "width: 100%;">
+                        <img src = "${glossaryProfile.thumbnailImage2}" style = "width: 100%;">
+                        <video class = "videoSrc" controls><source src="${glossaryProfile.trailer}" type="video/mp4"></video>
+                        <h2 class = "textSrc">${glossaryProfile.description}</h2>
+                        <img src = "${glossaryProfile.profileImage}" style = "border: none; height: 100px; width: 100px; margin: 0px;">
+                        <img src = "${glossaryProfile.profileNotes}" style = "width: 100%;">
+                    </div>
+                </div>
+            </div>
+            `; // glossaryProfile.thumbnail
+
+            characterGlossaryContainer.appendChild(characterProfile);
+        }
+
+        let countelements = characterGlossaryContainer.getElementsByClassName('btbelement');
+        characterArrayLength.innerHTML = "Profiles: " + countelements.length;
+
+        let gameDiffImage = document.querySelector('#gameDiffImage');
+        const btbelements = document.querySelectorAll('.btbelement');
+        const characterSummaryContainer = document.querySelector("#characterSummaryContainer");
+        btbelements.forEach((element, index) => {
+            function createCharacterSummary() {
+                let characterSummary = document.createElement('div'); 
+                characterSummaryContainer.innerHTML = "";
+
+                characterSummary.innerHTML = ` 
+                <div style = "background-color: black; height: 100%;">
+                    <img src = "${glossaryProfiles[index].profileImage}" style = "height: 20vh; width: auto; display: block; margin-left:auto; margin-right:auto;">
+                    <h1 class = "textSrc" style = "text-align: center; background-color: goldenrod; border-radius: 20px; padding: 1%; width: fit-content; font-size: 15px; border: 5px solid black; margin: auto;">${glossaryProfiles[index].dialogue1}</h1>
+                    <div style = "background-color: black; text-align: center; height: 100%; color: black; background-image: url(${glossaryProfiles[index].profileImage}); background-size: fit; font-size: 10px;">
+                        <h1 class = "textSrc" style = "text-align: center; background-color: goldenrod; border-radius: 20px; padding: 1%; width: fit-content; border: 5px solid black; margin: auto;">${index}</h1>
+                        <h1 class = "textSrc" style = "text-align: center; background-color: goldenrod; border-radius: 20px; padding: 1%; width: fit-content; border: 5px solid black; margin: auto;">${glossaryProfiles[index].name}</h1>
+                        <h1 class = "textSrc" style = "text-align: center; background-color: goldenrod; border-radius: 20px; padding: 1%; width: fit-content; border: 5px solid black; margin: auto;">${glossaryProfiles[index].laoName}</h1>
+                        <h1 class = "textSrc" style = "text-align: center; background-color: goldenrod; border-radius: 20px; padding: 1%; width: fit-content; border: 5px solid black; margin: auto;">${glossaryProfiles[index].description}</h1>
+                        <br>
+                        <img src = "${glossaryProfiles[index].thumbnailImage}" style = "width: 10%; height: 15%;"><br>
+                        <div style = "display: flex;">
+                            <img src = "${glossaryProfiles[index].profileImage}" style = "border: none; height: 15%; width: 15%; margin: 0px;">
+                            <img src = "img/moveset.PNG" style = "width: 10%; height: 15%;"><br>
+                            <img src = "${glossaryProfiles[index].designCharacter1}" style = "width: 10vh; height: 15vh;"><br>
+                            <img src = "${glossaryProfiles[index].designCharacter2}" style = "width: 10vh; height: 15vh;"><br>
+                            <img src = "${glossaryProfiles[index].designCharacter3}" style = "width: 10vh; height: 15vh;"><br>
+                            <img src = "${glossaryProfiles[index].designCharacter4}" style = "width: 10vh; height: 15vh;"><br>
+                            <img src = "${glossaryProfiles[index].designCharacter5}" style = "width: 10vh; height: 15vh;"><br>
+                        </div>
+
+                        <button style="width: 100%; height: 10vh; padding: 10px; text-align: center; border-radius: 50px; cursor: pointer;  border: 5px solid black; background-color: darkred;">
+                            <h1 class = "textSrc" style = "">${glossaryProfiles[index].abilityOneName}</h1>
+                            <img src = "${glossaryProfiles[index].abilityOneImage}" style="max-height: 100%; max-width: 100%; object-fit: contain; border-radius: 20px;">
+                        </button>
+                        <h1 class = "textSrc" style = "text-align: center; background-color: goldenrod; border-radius: 20px; padding: 1%; width: fit-content; font-size: 15px; border: 5px solid black; margin: auto;">${glossaryProfiles[index].abilityDescriptionOne}</h1>
+                        
+                        <button style="width: 100%; height: 10vh; padding: 10px; text-align: center; border-radius: 50px; cursor: pointer;  border: 5px solid black;background-color: darkred;">
+                            <h1 class = "textSrc" style = "">${glossaryProfiles[index].abilityTwoName}</h1>
+                            <img src = "${glossaryProfiles[index].abilityTwoImage}" style="max-height: 100%; max-width: 100%; object-fit: contain; border-radius: 20px;">
+                        </button>
+                        <h1 class = "textSrc" style = "text-align: center; background-color: goldenrod; border-radius: 20px; padding: 1%; width: fit-content; font-size: 15px; border: 5px solid black; margin: auto;">${glossaryProfiles[index].abilityDescriptionTwo}</h1>
+                        
+                        <button style="width: 100%; height: 10vh; padding: 10px; text-align: center; border-radius: 50px; cursor: pointer;  border: 5px solid black;background-color: darkred;">
+                            <h1 class = "textSrc" style = "">${glossaryProfiles[index].abilityThreeName}</h1>
+                            <img src = "${glossaryProfiles[index].abilityThreeImage}" style="max-height: 100%; max-width: 100%; object-fit: contain; border-radius: 20px;">
+                        </button>
+                        <h1 class = "textSrc" style = "text-align: center; background-color: goldenrod; border-radius: 20px; padding: 1%; width: fit-content; font-size: 15px; border: 5px solid black; margin: auto;">${glossaryProfiles[index].abilityDescriptionThree}</h1>
+                        <button style="width: 100%; height: 10vh; padding: 10px; text-align: center; border-radius: 50px; cursor: pointer;  border: 5px solid black; background-color: darkgoldenrod;">
+                            <h1 class = "textSrc" style = "">READ THE FULL STORY HERE</h1>
+                        </button>
+                    </div>
+                </div>
+                `;    
+            
+
+            characterSummaryContainer.appendChild(characterSummary);
+
+            }
+        element.addEventListener("click", createCharacterSummary);
+
+        });
+
+        // function createSummary(element){
+            
+        // }
+
+    
+    
+    </script>
+    
+
+    <script>
+    let legendoftheDayButton = document.querySelector('#legendoftheDayButton');
+    let legendoftheDayContainer = document.querySelector('#legendoftheDayContainer');
+    const randomIndex1 = Math.floor(Math.random() * glossaryProfiles.length); 
+    window.onload = function() {
+        createNewLegendoftheDay(randomIndex1); // TOBETODO: because randomIndex1 would need to be stored to be kept on for 24 hrs, requires backend, yikes!
+        anotherCharacterSummary(randomIndex2);
+    };
+
+    legendoftheDayButton.addEventListener('click', () => {
+        const randomIndex2 = Math.floor(Math.random() * glossaryProfiles.length); 
+        // alert(randomIndex2);
+        createNewLegendoftheDay(randomIndex2);  
+    });
+
+    function createNewLegendoftheDay(randomIndex){
+            let thisLegendoftheDay = document.createElement('div');  
+            // let legendButton = document.createElement('button');
+            // legendButton.textContent = 'Clicdsek Me!';
+            // // Directly set CSS styles
+            // legendButton.style.backgroundColor = 'blue';
+
+            legendoftheDayContainer.innerHTML = "";
+
+            thisLegendoftheDay.innerHTML = ` 
+            <div style = "height: 10vh; display: inline-flex; border-radius: 20px; padding: 1%; width: 90%; border: 5px solid black; background-image: url(img/formation-sonidosaurus.PNG); background-size: cover; background-repeat: no-repeat;">
+
+                <img src = "${glossaryProfiles[randomIndex].profileImage}" style = "height: 100%; width: auto; border-radius: 20px;">
+
+                <div style = "margin-left: 1%; width: 10%; height: inherit; padding: 1%;">
+                    <h1 class = "textSrc" style = "text-align: center; background-color: goldenrod; border-radius: 20px; padding: 2%; width: fit-content; border: 5px solid black; display: flex;">${randomIndex}</h1>
+                </div>
+
+                <div style = "margin-right: 5%;">
+                    <h1>${glossaryProfiles[randomIndex].laoName}</h1>
+                    <h2 class = "textSrc" style = "font-size: 30px;">${glossaryProfiles[randomIndex].name}</h2>
+                    <h2 class = "textSrc" style = "background-color: goldenrod; border-radius: 20px; padding: 2%; width: fit-content; border: 5px solid black;">LEGEND:${glossaryProfiles[randomIndex].legendValue}</h2>
+                </div>
+
+                <div style = "height: inherit; background-color: black; border-radius: 20px; width: 80%; border: 5px solid black; overflow-y: scroll; scrollbar-width: none; padding: 1%;">
+                    <h2 class = "textSrc" >${glossaryProfiles[randomIndex].description}</h2>
+                    <h2 class = "textSrc" style = "text-align: right;">${glossaryProfiles[randomIndex].descriptionAuthor}</h2>
+                </div>
+
+            </div>
+            `;    
+
+            function anotherCharacterSummary(randomIndex) {
+                let characterSummary = document.createElement('div'); 
+                characterSummaryContainer.innerHTML = "";
+
+                characterSummary.innerHTML = ` 
+                     <div style = "display: block; height: 3000px;">
+                    <div style = "display: inline-flex; border: 20px solid black; background-color: black; color: white; height: 40%;">
+                        <img src = "${glossaryProfiles[randomIndex].profileImage}" style = "height: 100%; width: 1000px; margin: auto;">
+                        <div style = "background-color: black; text-align: center; height: 50%;">
+                            <h1 class = "textSrc">${randomIndex}</h1>
+                            <h1 class = "textSrc">${glossaryProfiles[randomIndex].name}</h1>
+                            <h1 class = "textSrc">${glossaryProfiles[randomIndex].laoName}</h1>
+                            <audio class="audioSrc" controls style = "background-color: darkgoldenrod;"><source src="img/btbva4.mp3" type="audio/mpeg"></audio> 
+                            <audio class="audioSrc" controls style = "background-color: darkgoldenrod;"><source src="img/btbva5.mp3" type="audio/mpeg"></audio> 
+                            <audio class="audioSrc" controls style = "background-color: darkgoldenrod;"><source src="img/btbva6.mp3" type="audio/mpeg"></audio> 
+                            <br>
+                            <img src = "${glossaryProfiles[randomIndex].thumbnailImage}" style = "width: 10%; height: 15%;"><br>
+                            <img src = "${glossaryProfiles[randomIndex].profileImage}" style = "border: none; height: 15%; width: 15%; margin: 0px;">
+                            <img src = "${glossaryProfiles[randomIndex].profileNotes}" style = "width: 100%;">
+                            <br>
+                            <video class = "videoSrc" controls><source src="img/btbmedia1.mp4" type="video/mp4"></video>
+                            <video class = "videoSrc" controls><source src="img/btbmedia1.mp4" type="video/mp4"></video>
+                            <video class = "videoSrc" controls><source src="img/btbmedia1.mp4" type="video/mp4"></video>
+                        </div>
+                        <div style = "height: 100%; width: 100%; overflow-y: scroll; background-color: silver; color: black;">
+                            <h1 class = "textSrc" style = "text-align: center">"${glossaryProfiles[randomIndex].quote2}"</h1>
+                            <hr style = "margin: 3%;">
+                            <h1 class = "textSrc" style = "text-align: center">${glossaryProfiles[randomIndex].description}</h1>
+                            <hr style = "margin: 3%;">
+                            <h1 style = "text-align: center">KNOWN</h1>
+
+                            <img src = "${glossaryProfiles[randomIndex].gallery01}" style = "width: 5%; height: 5%;">
+                            <img src = "${glossaryProfiles[randomIndex].gallery02}" style = "width: 5%; height: 5%;">
+                            <img src = "${glossaryProfiles[randomIndex].gallery03}" style = "width: 5%; height: 5%;">
+                            <img src = "${glossaryProfiles[randomIndex].gallery04}" style = "width: 5%; height: 5%;">
+                            <img src = "${glossaryProfiles[randomIndex].gallery05}" style = "width: 5%; height: 5%;">
+                            <img src = "${glossaryProfiles[randomIndex].gallery06}" style = "width: 5%; height: 5%;">
+                            <img src = "${glossaryProfiles[randomIndex].gallery07}" style = "width: 5%; height: 5%;">
+                            <img src = "${glossaryProfiles[randomIndex].gallery08}" style = "width: 5%; height: 5%;">
+                            <img src = "${glossaryProfiles[randomIndex].gallery09}" style = "width: 5%; height: 5%;">
+                            <img src = "${glossaryProfiles[randomIndex].gallery10}" style = "width: 5%; height: 5%;">
+                        </div>
+                    </div>
+
+                    <div style="display: flex; height: 58%; background-color: darkred; width: 100%;">
+                        <div style = "display: block; width: 500px;">
+                            <div>
+                                <img id = "partyOneImage" src="${glossaryProfiles[randomIndex].profileImage}" style="width: 500px; height: 300px;">
+                                <div style = "background-color: darkgoldenrod;">
+                                    <h1 id = "partyOneHealth" style = "text-align: center; font-size: 50px; color: white; background-color: black; padding: 20px;"></h1>
+                                    <button id = "partyOneAttack" style="display: block; margin: 0 auto;"><h1>ATTACK</h1><img src = "${glossaryProfiles[randomIndex].thumbnailImage}" style = "width: 200px; height: 200px;"></button>
+                                    <button id = "partyOneUltimate" style="display: block; margin: 0 auto;"><h1>CLOTH_ULT</h1><img src = "${glossaryProfiles[randomIndex].ultimateImage}" style = "width: 200px; height: 200px;"></button><br>
+                                    <br><br>
+                                    <br><br>
+                                    <button id = "partyOneAbilityOne" style="display: block; margin: 0 auto;"><h1>ABILITY ONE</h1><img src = "${glossaryProfiles[randomIndex].abilityOneImage}" style = "width: 200px; height: 200px;"></button>
+                                    <button id = "partyOneAbilityTwo" style="display: block; margin: 0 auto;"><h1>ABILITY TWO</h1><img src = "${glossaryProfiles[randomIndex].abilityTwoImage}" style = "width: 200px; height: 200px;"></button>
+                                    <button id = "partyOneAbilityThree" style="display: block; margin: 0 auto;"><h1>ABILITY THREE</h1><img src = "${glossaryProfiles[randomIndex].abilityThreeImage}" style = "width: 200px; height: 200px;"></button>
+                                </div>
+                            </div>
+                            <!-- <div>
+                                <img id = "partyOneImage" src="img/img-linthong.PNG" style="width: 500px; height: 300px; overflow-y: auto;">
+                                <div style = "background-color: darkgoldenrod;">
+                                    <h1 id = "partyOneHealth" style = "text-align: center; font-size: 50px; color: white;"></h1>
+                                    <button id = "partyOneUltimate"><h1>CLOTH_ULT</h1></button><br>
+                                    <br><br>
+                                    <button id = "partyOneAttack"><h1>ATTACK</h1></button>
+                                </div>
+                            </div>
+                            <div>
+                                <img id = "partyOneImage" src="img/img-malichan.png" style="width: 500px; height: 300px; overflow-y: auto;">
+                                <div style = "background-color: darkgoldenrod;">
+                                    <h1 id = "partyOneHealth" style = "text-align: center; font-size: 50px; color: white;"></h1>
+                                    <button id = "partyOneUltimate"><h1>CLOTH_ULT</h1></button><br>
+                                    <br><br>
+                                    <button id = "partyOneAttack"><h1>ATTACK</h1></button>
+                                </div>
+                            </div> -->
+                        </div>
+
+                        <div id = "battleLog" style = "background-color: lightcoral; width: 85%; text-align: center; display: block; font-size: 100px; overflow-y: scroll; scrollbar-width: thin; height: 100%;"></div>
+
+                        <div style = "display: block; width: 500px;">
+                            <div>
+                                <img id = "partyTwoImage" src="img/img-nangla.png" style="width: 500px; height: 300px; overflow-y: auto;">
+                                <div style = "background-color: darkgoldenrod;">
+                                    <h1 id = "partyTwoHealth" style = "text-align: center; font-size: 50px; color: white; background-color: black; padding: 20px;"></h1>
+                                    <h1 id = "partyTwo" style = "text-align: center; font-size: 50px; color: white;"></h1>
+                                    <!-- <button><h1>CLOTH_ULT</h1></button><br> -->
+                                    <br><br>
+                                    <!-- <button id = "partyTwoAttack"><h1>ATTACK</h1></button> -->
+                                </div>
+                            </div>
+                            <!-- <div>
+                                <img id = "partyTwoImage" src="img/img-kalaket.png" style="width: 500px; height: 300px; overflow-y: auto;">
+                                <div style = "background-color: darkgoldenrod;">
+                                    <h1 id = "partyTwoHealth" style = "text-align: center; font-size: 50px; color: white;"></h1>
+                                    <button><h1>CLOTH_ULT</h1></button><br>
+                                    <br><br>
+                                    <button id = "partyTwoAttack"><h1>ATTACK</h1></button>
+                                </div>
+                            </div>
+                            <div>
+                                <img id = "partyTwoImage" src="img/img-mahothonthevi.png" style="width: 500px; height: 300px; overflow-y: auto;">
+                                <div style = "background-color: darkgoldenrod;">
+                                    <h1 id = "partyTwoHealth" style = "text-align: center; font-size: 50px; color: white;"></h1>
+                                    <button><h1>CLOTH_ULT</h1></button><br>
+                                    <br><br>
+                                    <button id = "partyTwoAttack"><h1>ATTACK</h1></button>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                </div>  
+                `;    
+            
+                characterSummaryContainer.appendChild(characterSummary);
+            }
+
+            
+
+            // legendoftheDayContainer.appendChild(legendButton);
+            legendoftheDayContainer.appendChild(thisLegendoftheDay);
+            thisLegendoftheDay.style.cursor = 'pointer';
+            thisLegendoftheDay.addEventListener('click', () => {
+                anotherCharacterSummary(randomIndex);
+            });
+
+            // const legendoftheDayAppend = document.querySelectorAll('.legendoftheDayAppend');
+
+
+    }
+
+    // let legendButton = document.querySelector('#legendButton');
+
+
+    function scheduleDailyActivation() {
+        const now = new Date();
+        const estTimeZone = "America/New_York";
+
+        // Create a date object for the next 12:00 AM EST
+        let nextActivation = new Date(now.toLocaleString("en-US", { timeZone: estTimeZone }));
+        nextActivation.setHours(24, 0, 0, 0); // Set to the next midnight
+
+        // If it's already past midnight, set for the next day
+        if (now >= nextActivation) {
+            nextActivation.setDate(nextActivation.getDate() + 1);
+        }
+
+        // Calculate the time until the next activation
+        const timeUntilNextActivation = nextActivation - now;
+
+        // Schedule the function to run at the next activation time
+        setTimeout(() => {
+            myFunction();
+            // Reschedule for the next day
+            setInterval(myFunction, 24 * 60 * 60 * 1000);
+        }, timeUntilNextActivation);
+    }
+
+    // Start the scheduling
+    scheduleDailyActivation();
+
+
+    </script>
+
+    <script>
+    // function displayRandomProfile() {
+    //     // Clear the existing profiles
+    //     characterGlossaryContainer.innerHTML = "";
+
+    //     // Get a random index from the glossaryProfiles array
+    //     const randomIndex1 = Math.floor(Math.random() * glossaryProfiles.length);
+    //     const randomIndex2 = Math.floor(Math.random() * glossaryProfiles.length);
+    //     const randomIndex3 = Math.floor(Math.random() * glossaryProfiles.length);
+    //     const randomIndex4 = Math.floor(Math.random() * glossaryProfiles.length);
+
+    //     // Create profile for the randomly selected character
+    //     createProfile(glossaryProfiles[randomIndex1]);
+    //     createProfile(glossaryProfiles[randomIndex2]);
+    //     createProfile(glossaryProfiles[randomIndex3]);
+    //     createProfile(glossaryProfiles[randomIndex4]);
+    // }
+
+    // Add event listener to the button
+    // randomProfileButton.addEventListener("click", displayRandomProfile);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // function applyFilters() {
+    //     const selectedFilters = Array.from(document.querySelectorAll('.btbfilter:checked')).map(input => input.value);
+    //     const allElements = document.querySelectorAll('.btbelement');
+
+    //     // Check if the special "all" filter is selected
+    //     const showAll = selectedFilters.includes('all');
+
+    //     allElements.forEach(element => {
+    //         const elementClasses = element.className.split(' ');
+    //         if (showAll || selectedFilters.length === 0) {
+    //             // If "all" filter is selected or no filters are selected, display all elements
+    //             element.style.display = 'block';
+    //         } else {
+    //             // Otherwise, check if any of the selected filters are present in the element's classes
+    //             const isVisible = selectedFilters.some(filter => elementClasses.includes(filter));
+    //             element.style.display = isVisible ? 'block' : 'none';
+    //         }
+    //     });
+    // }
+
+    // // Add event listeners to filters
+    // const filterInputs = document.querySelectorAll('.btbfilter');
+    // filterInputs.forEach(input => {
+    //     +input.addEventListener('change', applyFilters);
+    // });
+
+    // // Initial apply filters
+    // applyFilters();
+
+    function applyFilters() {
+            const selectedFilters = Array.from(document.querySelectorAll('.btbfilter:checked')).map(input => input.value);
+            const allElements = document.querySelectorAll('.btbelement');
+    
+            // Check if the special "all" filter is selected
+            const showAll = selectedFilters.includes('all');
+    
+            allElements.forEach(element => {
+                const elementClasses = element.className.split(' ');
+    
+                if (showAll || selectedFilters.length === 0) {
+                    // If "all" filter is selected or no filters are selected, display all elements
+                    element.style.display = 'block';
+                } else {
+                    // Check if the element contains all selected filters
+                    const hasAllFilters = selectedFilters.every(filter => elementClasses.includes(filter));
+                    element.style.display = hasAllFilters ? 'block' : 'none';
+                }
+            });
+        }
+    
+        // Add event listeners to filters
+        const filterInputs = document.querySelectorAll('.btbfilter');
+        filterInputs.forEach(input => {
+            input.addEventListener('change', applyFilters);
+        });
+    
+        // Initial apply filters
+        applyFilters();
+
+
+    </script>
+
+    <!-- <script>
+        window.onload = anotherCharacterSummary(index);
+    </script> -->
+
+    <script>
+        function openCity(evt, cityName) {
+          var i, tabcontent, tablinks;
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+          document.getElementById(cityName).style.display = "block";
+          evt.currentTarget.className += " active";
+        }
+        
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+        </script>
+
+        <script>
+            // Get the button and all cardDetails elements
+            const toggleButton = document.getElementById('toggleButton');
+            const cardDetails = document.querySelectorAll('.cardDetails');
+
+            // Function to toggle visibility of cardDetails
+            toggleButton.addEventListener('click', function() {
+                cardDetails.forEach(card => {
+                    // Check the computed style to see if it's currently visible
+                    const isVisible = window.getComputedStyle(card).display !== 'none';
+
+                    // Toggle the display property
+                    if (isVisible) {
+                        card.style.display = 'none';
+                    } else {
+                        card.style.display = 'block';
+                    }
+                });
+            });
+        </script>
+    
+
+    <script>
+        const fullscreenButton = document.getElementById('fullscreenButton');
+    
+        // Function to toggle fullscreen mode
+        function toggleFullScreen() {
+            if (!document.fullscreenElement && 
+                !document.mozFullScreenElement && 
+                !document.webkitFullscreenElement && 
+                !document.msFullscreenElement) {  // Check if not in fullscreen
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) {
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) {
+                    document.documentElement.webkitRequestFullscreen();
+                } else if (document.documentElement.msRequestFullscreen) {
+                    document.documentElement.msRequestFullscreen();
+                }
+            } else {  // If already in fullscreen, exit fullscreen
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }
+    
+        fullscreenButton.addEventListener('click', toggleFullScreen);
+    </script>
+
+
+
+</body>
+</html>
